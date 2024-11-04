@@ -2,8 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:virtual_card/main.dart';
+import 'package:virtual_card/models/contact_model.dart';
+import 'package:virtual_card/pages/form_page.dart';
 import 'package:virtual_card/utils/constants.dart';
 
 class ScanPage extends StatefulWidget {
@@ -17,12 +21,41 @@ class ScanPage extends StatefulWidget {
 class _ScanPageState extends State<ScanPage> {
   bool isScanOver = false;
   List<String> lines = [];
+  String name = '',
+      mobile = '',
+      email = '',
+      address = '',
+      company = '',
+      designation = '',
+      website = '',
+      image = '';
+
+  void createContact() {
+    //
+    final contact = ContactModel(
+      name: name,
+      mobile: mobile,
+      address: address,
+      company: company,
+      designation: designation,
+      website: website,
+      image: image,
+      email: email,
+    );
+    context.goNamed(FormPage.routeName, extra: contact);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Scan Contact Card"),
+        actions: [
+          IconButton(
+            onPressed: image.isEmpty ? null : () {},
+            icon: const Icon(Icons.arrow_forward),
+          ),
+        ],
       ),
       body: ListView(
         children: [
@@ -69,6 +102,9 @@ class _ScanPageState extends State<ScanPage> {
                     DragTargetItem(
                         property: ContactProperties.address,
                         onDrop: getPropertyValue),
+                    DragTargetItem(
+                        property: ContactProperties.website,
+                        onDrop: getPropertyValue),
                   ],
                 ),
               ),
@@ -90,6 +126,10 @@ class _ScanPageState extends State<ScanPage> {
     final xFile = await ImagePicker().pickImage(source: camera);
 
     if (xFile != null) {
+      setState(() {
+        image = xFile.path;
+      });
+
       EasyLoading.show(status: "Please wait");
       final textRecognizer =
           TextRecognizer(script: TextRecognitionScript.latin);
@@ -110,7 +150,31 @@ class _ScanPageState extends State<ScanPage> {
     }
   }
 
-  getPropertyValue(String property, String value) {}
+  void getPropertyValue(String property, String value) {
+    switch (property) {
+      case ContactProperties.name:
+        name = value;
+        break;
+      case ContactProperties.mobile:
+        mobile = value;
+        break;
+      case ContactProperties.address:
+        address = value;
+        break;
+      case ContactProperties.company:
+        company = value;
+        break;
+      case ContactProperties.designation:
+        designation = value;
+        break;
+      case ContactProperties.website:
+        website = value;
+        break;
+      case ContactProperties.email:
+        email = value;
+        break;
+    }
+  }
 }
 
 class LineItem extends StatelessWidget {
