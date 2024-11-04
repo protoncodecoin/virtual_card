@@ -52,7 +52,7 @@ class _ScanPageState extends State<ScanPage> {
         title: const Text("Scan Contact Card"),
         actions: [
           IconButton(
-            onPressed: image.isEmpty ? null : () {},
+            onPressed: image.isEmpty ? null : createContact,
             icon: const Icon(Icons.arrow_forward),
           ),
         ],
