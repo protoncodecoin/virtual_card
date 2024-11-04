@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:virtual_card/models/contact_model.dart';
+import 'package:virtual_card/providers/contact_provider.dart';
 import 'package:virtual_card/utils/constants.dart';
 
 class FormPage extends StatefulWidget {
@@ -52,6 +54,12 @@ class _FormPageState extends State<FormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Form Page"),
+        actions: [
+          IconButton(
+            onPressed: saveContact,
+            icon: const Icon(Icons.save),
+          ),
+        ],
       ),
       body: Form(
         key: _formkey,
@@ -151,5 +159,26 @@ class _FormPageState extends State<FormPage> {
         ),
       ),
     );
+  }
+
+  void saveContact() async {
+    if (_formkey.currentState!.validate()) {
+      widget.contactModel.name = _nameController.text;
+      widget.contactModel.email = _emailController.text;
+      widget.contactModel.address = _addressController.text;
+      widget.contactModel.designation = _designationController.text;
+      widget.contactModel.mobile = _mobileController.text;
+      widget.contactModel.website = _webController.text;
+    }
+
+    Provider.of<ContactProvider>(context, listen: false)
+        .insertContact(widget.contactModel)
+        .then((value) {
+      if (value > 0) {
+        //
+      }
+    }).catchError((error) {
+      //
+    });
   }
 }
