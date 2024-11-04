@@ -15,7 +15,7 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   final _formkey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _mobieController = TextEditingController();
+  final _mobileController = TextEditingController();
   final _addressController = TextEditingController();
   final _emailController = TextEditingController();
   final _companyController = TextEditingController();
@@ -25,7 +25,7 @@ class _FormPageState extends State<FormPage> {
   @override
   void initState() {
     _nameController.text = widget.contactModel.name;
-    _mobieController.text = widget.contactModel.mobile;
+    _mobileController.text = widget.contactModel.mobile;
     _addressController.text = widget.contactModel.address;
     _emailController.text = widget.contactModel.email;
     _companyController.text = widget.contactModel.company;
@@ -37,7 +37,7 @@ class _FormPageState extends State<FormPage> {
   @override
   void dispose() {
     _nameController.dispose();
-    _mobieController.dispose();
+    _mobileController.dispose();
     _addressController.dispose();
     _emailController.dispose();
     _companyController.dispose();
@@ -71,7 +71,82 @@ class _FormPageState extends State<FormPage> {
                 }
                 return null;
               },
-            )
+            ),
+            TextFormField(
+              keyboardType: TextInputType.phone,
+              controller: _mobileController,
+              decoration: const InputDecoration(
+                labelText: "Mobile Number",
+                prefixIcon: Icon(Icons.phone),
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return emptyFieldErrorMsg;
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: "Email Address",
+                prefixIcon: Icon(Icons.email),
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                return null;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              controller: _addressController,
+              decoration: const InputDecoration(
+                labelText: "Street Address",
+                prefixIcon: Icon(Icons.location_city),
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                return null;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              controller: _companyController,
+              decoration: const InputDecoration(
+                labelText: "Company Name",
+                prefixIcon: Icon(Icons.business),
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                return null;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              controller: _designationController,
+              decoration: const InputDecoration(
+                labelText: "Designation",
+                prefixIcon: Icon(Icons.work),
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                return null;
+              },
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              controller: _webController,
+              decoration: const InputDecoration(
+                labelText: "Website",
+                prefixIcon: Icon(Icons.pages),
+                border: InputBorder.none,
+              ),
+              validator: (value) {
+                return null;
+              },
+            ),
           ],
         ),
       ),

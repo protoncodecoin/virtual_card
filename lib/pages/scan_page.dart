@@ -5,7 +5,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:virtual_card/main.dart';
 import 'package:virtual_card/models/contact_model.dart';
 import 'package:virtual_card/pages/form_page.dart';
 import 'package:virtual_card/utils/constants.dart';
