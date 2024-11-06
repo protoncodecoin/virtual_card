@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:virtual_card/models/contact_model.dart';
 import 'package:virtual_card/providers/contact_provider.dart';
 import 'package:virtual_card/utils/constants.dart';
+import 'package:virtual_card/utils/helper_functions.dart';
 
 class FormPage extends StatefulWidget {
   static const String routeName = 'form';
@@ -175,10 +176,14 @@ class _FormPageState extends State<FormPage> {
         .insertContact(widget.contactModel)
         .then((value) {
       if (value > 0) {
-        //
+        if (mounted) {
+          showMsg(context, "Saved");
+        }
       }
     }).catchError((error) {
-      //
+      if (mounted) {
+        showMsg(context, "Saved");
+      }
     });
   }
 }
