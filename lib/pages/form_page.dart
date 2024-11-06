@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_card/models/contact_model.dart';
+import 'package:virtual_card/pages/home_page.dart';
 import 'package:virtual_card/providers/contact_provider.dart';
 import 'package:virtual_card/utils/constants.dart';
 import 'package:virtual_card/utils/helper_functions.dart';
@@ -178,11 +180,12 @@ class _FormPageState extends State<FormPage> {
       if (value > 0) {
         if (mounted) {
           showMsg(context, "Saved");
+          context.goNamed(HomePage.routeName);
         }
       }
     }).catchError((error) {
       if (mounted) {
-        showMsg(context, "Saved");
+        showMsg(context, "Failed to save contact");
       }
     });
   }
