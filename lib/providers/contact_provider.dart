@@ -19,4 +19,23 @@ class ContactProvider extends ChangeNotifier {
     contactList = await db.getAllContacts();
     notifyListeners();
   }
+
+  Future<int> deleteContact(int id) async {
+    return db.deleteContact(id);
+  }
+
+  Future<void> updateFavorite(ContactModel contactModel) async {
+    contactModel.favorite = !contactModel.favorite;
+    final value = contactModel.favorite ? 0 : 1;
+    await db.updateFavorite(contactModel.id, value);
+    final index = contactList.indexOf(contactModel);
+    contactList[index].favorite = !contactList[index].favorite;
+
+    notifyListeners();
+  }
+
+  Future<void> getAllFavoriteContacts() async {
+    contactList = await db.getAllfavoriteContacts();
+    notifyListeners();
+  }
 }

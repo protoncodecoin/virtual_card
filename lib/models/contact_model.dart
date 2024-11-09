@@ -54,14 +54,20 @@ class ContactModel {
   }
 
   factory ContactModel.fromMap(Map<String, dynamic> map) => ContactModel(
+        id: map[tblContactColId],
         name: map[tblContactColName],
         mobile: map[tblContactColMobile],
         email: map[tblContactColEmail],
         address: map[tblContactColAddress],
         company: map[tblContactColCompany],
         designation: map[tblContactColDesignation],
-        website: map[tblContactColWebsite]?? "",
+        website: map[tblContactColWebsite] ?? "",
         image: map[tblContactColImage],
-        favorite: map[tblContactColFavorite] == 1 ? true : false,
+        favorite: map[tblContactColFavorite] == '1' ? true : false,
       );
+
+  @override
+  String toString() {
+    return 'ContactModel(id: $id, name: $name, mobile: $mobile, address: $address, company: $company, designation: $designation, website: $website, image: $image, email: $email, favorite: $favorite)';
+  }
 }
