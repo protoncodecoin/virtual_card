@@ -59,7 +59,7 @@ class DbHelper {
   Future<int> updateFavorite(int id, int value) async {
     final db = await _open();
     return db.update(tableContact, {tblContactColFavorite: value},
-        where: '$tblContactColId =?', whereArgs: [id]);
+        where: '$tblContactColId = ?', whereArgs: [id]);
   }
 
   Future<List<ContactModel>> getAllfavoriteContacts() async {

@@ -90,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                   },
                   icon: Icon(contact.favorite
                       ? Icons.favorite
-                      : Icons.favorite_border),
+                      : Icons.favorite_border,
+                  ),
                 ),
               ),
             );
