@@ -60,7 +60,7 @@ class ContactModel {
         address: map[tblContactColAddress],
         company: map[tblContactColCompany],
         designation: map[tblContactColDesignation],
-        website: map[tblContactColWebsite],
+        website: map[tblContactColWebsite]?? "",
         image: map[tblContactColImage],
         favorite: map[tblContactColFavorite] == 1 ? true : false,
       );
