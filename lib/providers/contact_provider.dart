@@ -10,6 +10,7 @@ class ContactProvider extends ChangeNotifier {
   Future<int> insertContact(ContactModel contactModel) async {
     final rowId = await db.insertContact(contactModel);
     contactModel.id = rowId;
+    contactList.add(contactModel);
 
     notifyListeners();
     return rowId;
