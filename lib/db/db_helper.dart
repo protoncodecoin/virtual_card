@@ -64,12 +64,14 @@ class DbHelper {
         .delete(tableContact, where: '$tblContactColId = ?', whereArgs: [id]);
   }
 
+  /// Update contact field
   Future<int> updateContactField(int id, Map<String, dynamic> map) async {
     final db = await _open();
     return db.update(tableContact, map,
         where: '$tblContactColId = ?', whereArgs: [id]);
   }
 
+  /// Update the favorite
   Future<int> updateFavorite(int id, int value) async {
     final db = await _open();
     return db.update(tableContact, {tblContactColFavorite: value},
@@ -86,5 +88,12 @@ class DbHelper {
         mapList[index],
       ),
     );
+  }
+
+  Future<ContactModel> getContactById(int id) async {
+    final db = await _open();
+    final mapList = await db
+        .query(tableContact, where: '$tblContactColId = ?', whereArgs: [id]);
+    return ContactModel.fromMap(mapList.first);
   }
 }

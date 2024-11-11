@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_card/models/contact_model.dart';
+import 'package:virtual_card/pages/contact_details_page.dart';
 import 'package:virtual_card/pages/form_page.dart';
 import 'package:virtual_card/pages/home_page.dart';
 import 'package:virtual_card/pages/scan_page.dart';
@@ -45,6 +46,12 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => const HomePage(),
         routes: [
           GoRoute(
+            name: ContactDetailsPage.routeName,
+            path: ContactDetailsPage.routeName,
+            builder: (context, state) =>
+                ContactDetailsPage(id: state.extra! as int),
+          ),
+          GoRoute(
             name: ScanPage.routeName,
             path: ScanPage.routeName,
             builder: (context, state) => const ScanPage(),
@@ -55,7 +62,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, state) => FormPage(
                   contactModel: state.extra! as ContactModel,
                 ),
-              )
+              ),
             ],
           ),
         ],

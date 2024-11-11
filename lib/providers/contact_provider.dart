@@ -38,4 +38,8 @@ class ContactProvider extends ChangeNotifier {
     contactList = await db.getAllfavoriteContacts();
     notifyListeners();
   }
+
+  Future<ContactModel> getContactById(int id) {
+    return db.getContactById(id);
+  }
 }

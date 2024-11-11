@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:virtual_card/pages/contact_details_page.dart';
 import 'package:virtual_card/pages/scan_page.dart';
 import 'package:virtual_card/providers/contact_provider.dart';
 import 'package:virtual_card/utils/helper_functions.dart';
@@ -83,14 +84,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               child: ListTile(
+                onTap: () {
+                  context.goNamed(ContactDetailsPage.routeName,
+                      extra: contact.id);
+                },
                 title: Text(contact.name),
                 trailing: IconButton(
                   onPressed: () {
                     provider.updateFavorite(contact);
                   },
-                  icon: Icon(contact.favorite
-                      ? Icons.favorite
-                      : Icons.favorite_border,
+                  icon: Icon(
+                    contact.favorite ? Icons.favorite : Icons.favorite_border,
                   ),
                 ),
               ),
