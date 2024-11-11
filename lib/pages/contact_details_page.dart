@@ -35,7 +35,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final contact = snapshot.data;
-              ListView(
+              return ListView(
                 padding: const EdgeInsets.all(8.0),
                 children: [
                   Image.file(
