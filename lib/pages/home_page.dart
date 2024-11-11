@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
               selectedIndex = value;
             });
 
-            _fetchDat();
+            _fetchData();
           },
           currentIndex: selectedIndex,
           backgroundColor: Colors.blue[100],
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _fetchDat() {
+  void _fetchData() {
     switch (selectedIndex) {
       case 0:
         Provider.of<ContactProvider>(context, listen: false).getAllContacts();

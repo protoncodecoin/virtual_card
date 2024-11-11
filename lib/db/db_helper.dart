@@ -13,16 +13,30 @@ class DbHelper {
   $tblContactColDesignation text,
   $tblContactColWebsite text,
   $tblContactColImage text,
-  $tblContactColFavorite text)''';
+  $tblContactColFavorite integer)''';
 
   Future<Database> _open() async {
     final root = await getDatabasesPath();
     final dbPath = P.join(root, 'contact.db');
     return openDatabase(
       dbPath,
-      version: 1,
+      version: 2,
       onCreate: (db, version) {
         db.execute(_createTableContact);
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion == 1) {
+          await db.execute(
+              'alter table $tableContact rename to ${'contact_old'}'); // rename the old database table
+          await db.execute(_createTableContact); // create a new table
+          // migrate data to new table
+          final rows = await db.query('contact_old');
+          for (var row in rows) {
+            await db.insert(tableContact, row);
+          }
+
+          await db.execute('drop table if exists ${'contact_old'}');
+        }
       },
     );
   }
