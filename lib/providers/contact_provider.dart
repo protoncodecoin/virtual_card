@@ -26,13 +26,10 @@ class ContactProvider extends ChangeNotifier {
   }
 
   Future<void> updateFavorite(ContactModel contactModel) async {
-    // contactModel.favorite = !contactModel.favorite;
     final value = contactModel.favorite ? 0 : 1;
-    print(value);
     await db.updateFavorite(contactModel.id, value);
     final index = contactList.indexOf(contactModel);
     contactList[index].favorite = !contactList[index].favorite;
-    // print(contactList);
 
     notifyListeners();
   }
